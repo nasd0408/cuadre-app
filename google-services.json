@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "352466600001",
+    "project_id": "cuadreapp-782cf",
+    "storage_bucket": "cuadreapp-782cf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352466600001:android:00f18e580fdf58a19e46c0",
+        "android_client_info": {
+          "package_name": "com.nicolassira.cuadreapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352466600001-7rtmru9o6ka1ge3uf18j5ta3qh2g59bs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nicolassira.cuadreapp",
+            "certificate_hash": "0f4e2c204d99e2713e27560341c947c56e6a6a6b"
+          }
+        },
+        {
+          "client_id": "352466600001-s05f9s9c2u1pv57sd1i3l7jh0sdg664q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nicolassira.cuadreapp",
+            "certificate_hash": "ff7c3a750e3dacd1e054720f88d5dca49bcf1053"
+          }
+        },
+        {
+          "client_id": "352466600001-ium3v9o1e7lqs8u597ddttp8bljsg3cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD72bdi49918qHAdostRgaH19VUGGqQn94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352466600001-ium3v9o1e7lqs8u597ddttp8bljsg3cr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

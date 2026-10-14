@@ -1,0 +1,41 @@
+{
+  "cli": {
+    "version": ">= 16.32.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://cuadreapp.duckdns.org/api",
+        "EXPO_PUBLIC_ADMOB_BANNER_ID": "ca-app-pub-4594557821200544/7964139515",
+        "EXPO_PUBLIC_ADMOB_INTERSTITIAL_ID": "ca-app-pub-4594557821200544/2683892677",
+        "EXPO_PUBLIC_ADMOB_APPOPEN_ID": "ca-app-pub-4594557821200544/7157490156",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "352466600001-ium3v9o1e7lqs8u597ddttp8bljsg3cr.apps.googleusercontent.com"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://cuadreapp.duckdns.org/api",
+        "EXPO_PUBLIC_ADMOB_BANNER_ID": "ca-app-pub-4594557821200544/7964139515",
+        "EXPO_PUBLIC_ADMOB_INTERSTITIAL_ID": "ca-app-pub-4594557821200544/2683892677",
+        "EXPO_PUBLIC_ADMOB_APPOPEN_ID": "ca-app-pub-4594557821200544/7157490156",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "352466600001-ium3v9o1e7lqs8u597ddttp8bljsg3cr.apps.googleusercontent.com"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

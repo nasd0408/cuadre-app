@@ -1,0 +1,68 @@
+# Sin esto, los tests solo corren si alguien se acuerda, y el endurecimiento se
+# degrada solo. Cada comprobacion de aqui corresponde a un fallo que ya ocurrio:
+#
+#   tsc       -> los errores de tipos que aparecieron al migrar Firebase
+#   test      -> el selector de contactos, el calendario que no subia a Google
+#   bundle web-> tres integraciones que tumbaron `expo export` por importar un
+#                modulo nativo de forma estatica
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Fijado a proposito: el repo no tiene "engines", asi que sin esto CI
+          # usaria cualquier version y podria pasar en verde algo que falla en
+          # la maquina de desarrollo.
+          node-version: '22'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Tipos
+        run: npx tsc --noEmit
+
+      # Falla solo con ERRORES. La regla que justifica esto por si sola es
+      # react-hooks/rules-of-hooks: cazo tres useCallback colocados despues de un
+      # `return` temprano, algo que tsc compila sin rechistar y que en runtime
+      # desordena los hooks y rompe la pantalla.
+      - name: Linter
+        run: npx eslint . --max-warnings=-1
+
+      - name: Tests
+        run: npm test -- --ci
+
+      - name: Construir el bundle web
+        run: npx expo export --platform web --clear
+
+      # LA comprobacion que ha salvado tres integraciones. Los SDK nativos se
+      # cargan con require diferido dentro de try/catch precisamente para que el
+      # bundle web nunca los resuelva; un import estatico los cuela y rompe tanto
+      # la web como Expo Go, sin error visible hasta que alguien lo abre.
+      - name: Ningun modulo nativo en el bundle web
+        run: |
+          bundle=$(ls dist/_expo/static/js/web/index-*.js)
+          fallo=0
+          for modulo in expo-contacts expo-calendar react-native-google-mobile-ads @react-native-firebase google-signin; do
+            n=$(grep -c "$modulo" "$bundle" || true)
+            echo "$modulo: $n"
+            [ "$n" -eq 0 ] || fallo=1
+          done
+          exit $fallo
+
+      # Solo informativo: las vulnerabilidades de Expo/Metro son de herramientas
+      # de construccion y no viajan en la app. Lo que importa es que no aparezca
+      # una nueva en las dependencias de produccion.
+      - name: Auditoria de dependencias de produccion
+        run: npm audit --omit=dev || true

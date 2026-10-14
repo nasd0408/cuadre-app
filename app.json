@@ -1,0 +1,90 @@
+{
+  "expo": {
+    "name": "Cuadre APP",
+    "slug": "cuadre-app",
+    "version": "1.1.0",
+    "platforms": [
+      "android",
+      "web"
+    ],
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.nicolassira.cuadreapp",
+      "supportsTablet": true
+    },
+    "android": {
+      "permissions": [
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT",
+        "com.google.android.gms.permission.AD_ID",
+        "READ_CONTACTS",
+        "READ_CALENDAR",
+        "WRITE_CALENDAR"
+      ],
+      "blockedPermissions": [
+        "android.permission.WRITE_CONTACTS"
+      ],
+      "package": "com.nicolassira.cuadreapp",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "baseUrl": "/app"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font",
+      "expo-notifications",
+      "@react-native-community/datetimepicker",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-4594557821200544~3804834436",
+          "userTrackingUsageDescription": "Esto permite mostrarte anuncios más relevantes en el plan Gratis."
+        }
+      ],
+      "@react-native-google-signin/google-signin",
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
+      "./plugins/withWhatsAppQueries",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "extraProguardRules": "# Modelos que viajan por JSON: R8 no puede saber que se usan\n-keepattributes Signature,InnerClasses,EnclosingMethod\n-keepattributes *Annotation*\n\n# Crashlytics necesita numeros de linea y nombres de fichero para que los\n# reportes sean legibles. Sin esto se ven stacks sin lineas y no sirven.\n-keepattributes SourceFile,LineNumberTable\n-keep public class * extends java.lang.Exception\n\n# AdMob y Play Services usan reflexion internamente\n-keep class com.google.android.gms.ads.** { *; }\n-keep class com.google.android.gms.common.** { *; }"
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "877006f3-cefc-47f2-917a-45ba01b252d9"
+      }
+    },
+    "owner": "nasd0408s-organization",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/877006f3-cefc-47f2-917a-45ba01b252d9",
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD"
+    }
+  }
+}
